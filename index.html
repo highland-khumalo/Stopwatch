@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title>Timer</title>
+        <link rel="icon" type="image/png" href="logo_s.png">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <link rel="stylesheet" href="src/css/main.css"/>
+        <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css"/>
+        <script src="src/js/main.js"></script>
+    </head>
+
+    <body>
+        <nav class="navbar navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">
+                    <img src="./logo_s.png" alt="" width="30" class="d-inline-block align-text-top">
+                    Stopwatch
+                </a>
+            </div>
+        </nav>
+
+        <div class="inside">
+            <img src="./logo_v.png" height="150" alt="logo"/>
+
+            <p class="text-muted center intro">
+                Simple Stopwatch app..</p>
+
+            <h1 class="big center" id="time">
+                <mm id="hh"></hh>
+                <dd id="dd"></dd>
+                <mo id="mo"></mo>
+                <yy id="yy"></mo>
+                <mm id="mm">00</mm>:<ss id="ss">00</ss>
+            </h1>
+
+            <div class="buttons">
+                <button type="button" class="btn btn-primary" id="start">Start</button>
+                <button type="button" class="btn btn-primary" id="reset">Reset</button>
+            </div>
+        </div>
+
+        <script>
+            window.onload = function () {
+                document.getElementById("reset").onclick = reset;
+                document.getElementById("start").onclick = start;
+            };
+
+            var timer = null;
+            var years = 0;
+            var months = 0;
+            var days = 0;
+            var hours = 0;
+            var minutes = 0;
+            var seconds = 0;
+            var now_date = new Date()
+
+            function reset() {
+                document.getElementById("ss").innerHTML = "00";
+                document.getElementById("mm").innerHTML = "00";
+                document.getElementById("dd").innerHTML = "";
+                document.getElementById("hh").innerHTML = "";
+                document.getElementById("mo").innerHTML = "";
+                document.getElementById("yy").innerHTML = "";
+                minutes = 0;
+                seconds = 0;
+                document.getElementById("start").innerHTML = "Start";
+                document.getElementById("start").onclick = start;
+            }
+
+            function start() {
+                timer = setInterval(update, 1000);
+                document.getElementById("reset").disabled = "disabled";
+                document.getElementById("start").innerHTML = "Stop";
+                document.getElementById("start").onclick = stop;
+            }
+
+            function stop() {
+                clearInterval(timer);
+                document.getElementById("reset").disabled = "";
+                document.getElementById("start").innerHTML = "Resume";
+                document.getElementById("start").onclick = start;
+                // alert("stop");
+            }
+
+            function update() {
+                seconds++;
+                if (seconds > 59) {
+                    seconds = 0;
+                    minutes++;
+                }
+                if (seconds < 10) {
+                    document.getElementById("ss").innerHTML = "0" + seconds;
+                } else {
+                    document.getElementById("ss").innerHTML = seconds;
+                }
+
+                if (minutes < 10) {
+                    document.getElementById("mm").innerHTML = "0" + minutes;
+                } else {
+                    document.getElementById("mm").innerHTML = minutes;
+                }
+
+                if (hours < 10) {
+                    if (hours != "0") {
+                        document.getElementById("hh").innerHTML = "0" + hours;
+                    }
+                } else {
+                    document.getElementById("hh").innerHTML = hours;
+                }
+            }
+        </script>
+    </body>
+</html>

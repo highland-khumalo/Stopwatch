@@ -1,0 +1,30 @@
+.inside {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+}
+
+.center {
+    text-align: center;
+}
+
+.big {
+    font-size: 40px;
+}
+
+.buttons * {
+    margin: 5px;
+    margin-left: 11px;
+}
+
+.intro {
+    width: 163px;
+}
+
+@media screen and (min-width: 700px) {
+    .inside {
+        zoom: 110%;
+    }
+}
